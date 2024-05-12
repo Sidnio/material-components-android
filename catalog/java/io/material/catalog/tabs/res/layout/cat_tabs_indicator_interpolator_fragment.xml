@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <com.google.android.material.tabs.TabLayout
+    android:id="@+id/indicator_interpolator_tabLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:tabMode="scrollable">
+
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_all"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_shopping"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_news"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_maps"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_images"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_updates"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_settings"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_plugins"/>
+    <com.google.android.material.tabs.TabItem
+      android:text="@string/cat_tabs_label_more"/>
+
+  </com.google.android.material.tabs.TabLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="300dp"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/cat_tabs_indicator_interpolator_prompt"
+      android:textSize="18sp" />
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:orientation="horizontal">
+
+      <EditText
+        android:id="@+id/indicator_interpolator_editTextText"
+        android:layout_width="0dp"
+        android:background="@drawable/cat_tabs_edit_text_background"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:ems="3"
+        android:gravity="center"
+        android:inputType="number"
+        android:text="80" />
+
+      <Button
+        android:id="@+id/indicator_interpolator_ok_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_weight="2"
+        android:text="@string/cat_tabs_indicator_interpolator_ok"
+        android:textSize="20dp" />
+    </LinearLayout>
+
+  </LinearLayout>
+
+
+</FrameLayout>

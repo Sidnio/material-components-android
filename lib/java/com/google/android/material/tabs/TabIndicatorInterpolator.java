@@ -21,10 +21,12 @@ import static com.google.android.material.animation.AnimationUtils.lerp;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+
 import androidx.annotation.Dimension;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.internal.ViewUtils;
 import com.google.android.material.tabs.TabLayout.SlidingTabIndicator;
 import com.google.android.material.tabs.TabLayout.TabView;
@@ -63,9 +65,9 @@ class TabIndicatorInterpolator {
    * <p>For height, this method calculates the combined height of the icon (if present) and label
    * (if present).
    *
-   * @param tabView {@link TabView} for which to calculate left and right content bounds.
+   * @param tabView  {@link TabView} for which to calculate left and right content bounds.
    * @param minWidth the min width between the returned RectF's left and right bounds. Useful if
-   *     enforcing a min width of the indicator.
+   *                 enforcing a min width of the indicator.
    */
   static RectF calculateTabViewContentBounds(
       @NonNull TabView tabView, @Dimension(unit = Dimension.DP) int minWidth) {
@@ -96,13 +98,29 @@ class TabIndicatorInterpolator {
    * bounds will span the width of the {@code tab}'s content.
    *
    * @param tabLayout The tab's parent {@link TabLayout}
-   * @param tab The view of the tab under which the indicator will be positioned
+   * @param tab       The view of the tab under which the indicator will be positioned
    * @return A {@link RectF} containing the left and right bounds that the indicator should span
-   *     when {@code tab} is selected.
+   * when {@code tab} is selected.
    */
   static RectF calculateIndicatorWidthForTab(TabLayout tabLayout, @Nullable View tab) {
     if (tab == null) {
       return new RectF();
+    }
+
+    // indicator width
+    int tabIndicatorInterpolatorWidth = tabLayout.getTabIndicatorInterpolatorWidth();
+    if (tabIndicatorInterpolatorWidth != -1) {
+      if (tab.getWidth() > tabIndicatorInterpolatorWidth) {
+        int w = (tab.getWidth() - tabIndicatorInterpolatorWidth) / 2;
+        int left = tab.getLeft() + w;
+        int right = tab.getRight() - w;
+        return new RectF(left, tab.getTop(), right, tab.getBottom());
+      } else {
+        int w = (tabIndicatorInterpolatorWidth - tab.getWidth()) / 2;
+        int left = tab.getLeft() - w;
+        int right = tab.getRight() + w;
+        return new RectF(left, tab.getTop(), right, tab.getBottom());
+      }
     }
 
     // If the indicator should fit to the tab's content, calculate the content's width
@@ -121,9 +139,9 @@ class TabIndicatorInterpolator {
    * {@code tab} as selected.
    *
    * @param tabLayout The {@link TabLayout} parent of the tab and indicator being drawn.
-   * @param tab The tab that should be marked as selected
+   * @param tab       The tab that should be marked as selected
    * @param indicator The drawable to be drawn to indicate the selected tab. Update the drawable's
-   *     bounds, color, etc to mark the given tab as selected.
+   *                  bounds, color, etc to mark the given tab as selected.
    */
   void setIndicatorBoundsForTab(TabLayout tabLayout, View tab, @NonNull Drawable indicator) {
     RectF startIndicator = calculateIndicatorWidthForTab(tabLayout, tab);
@@ -144,13 +162,13 @@ class TabIndicatorInterpolator {
    *
    * <p>By default, this class will move the indicator linearly between tab destinations.
    *
-   * @param tabLayout The TabLayout parent of the indicator being drawn.
+   * @param tabLayout  The TabLayout parent of the indicator being drawn.
    * @param startTitle The title that should be indicated as selected when offset is 0.0.
-   * @param endTitle The title that should be indicated as selected when offset is 1.0.
-   * @param offset The fraction between startTitle and endTitle where the indicator is for a given
-   *     frame
-   * @param indicator The drawable to be drawn to indicate the selected tab. Update the drawable's
-   *     bounds, color, etc as {@code offset} changes to show the indicator in the correct position.
+   * @param endTitle   The title that should be indicated as selected when offset is 1.0.
+   * @param offset     The fraction between startTitle and endTitle where the indicator is for a given
+   *                   frame
+   * @param indicator  The drawable to be drawn to indicate the selected tab. Update the drawable's
+   *                   bounds, color, etc as {@code offset} changes to show the indicator in the correct position.
    */
   void updateIndicatorForOffset(
       TabLayout tabLayout,

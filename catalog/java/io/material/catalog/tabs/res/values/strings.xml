@@ -55,7 +55,9 @@
     Tabs in \"auto\" mode behave like fixed tabs with tabGravity = \"center\" when the tabs are less
     wide than the screen, and behave like scrollable tabs when the tabs are wider than the screen.
   </string>
-
+  <string name="cat_tabs_indicator_interpolator_prompt">Sets the tab indicator interpolator width</string>
+  <string name="cat_tabs_indicator_interpolator_ok">ok</string>
+  <string name="cat_tabs_indicator_interpolator_demo_title">Indicator Interpolator Demo</string>
   <!-- Selected indicator names -->
   <string name="cat_tabs_selected_indicator_line_bottom">Line (bottom)</string>
   <string name="cat_tabs_selected_indicator_line_top">Line (top)</string>

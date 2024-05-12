@@ -19,6 +19,7 @@ package io.material.catalog.tabs;
 import io.material.catalog.R;
 
 import androidx.fragment.app.Fragment;
+
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 import dagger.multibindings.IntoSet;
@@ -27,10 +28,13 @@ import io.material.catalog.application.scope.FragmentScope;
 import io.material.catalog.feature.Demo;
 import io.material.catalog.feature.DemoLandingFragment;
 import io.material.catalog.feature.FeatureDemo;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/** A landing fragment for the Catalog app that links to tabs demos. */
+/**
+ * A landing fragment for the Catalog app that links to tabs demos.
+ */
 public class TabsFragment extends DemoLandingFragment {
 
   @Override
@@ -84,10 +88,21 @@ public class TabsFragment extends DemoLandingFragment {
             return new TabsViewPagerDemoFragment();
           }
         });
+    additionalDemos.add(
+        new Demo(R.string.cat_tabs_indicator_interpolator_demo_title) {
+          @Override
+          public Fragment createFragment() {
+            return new TabsIndicatorInterpolatorFragment();
+          }
+        }
+    );
+
     return additionalDemos;
   }
 
-  /** The Dagger module for {@link TabsFragment} dependencies. */
+  /**
+   * The Dagger module for {@link TabsFragment} dependencies.
+   */
   @dagger.Module
   public abstract static class Module {
 
